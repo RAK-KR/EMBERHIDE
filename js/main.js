@@ -84,6 +84,16 @@ const player = new Player(scene, world, fx, audio, input);
 const monster = new Monster(scene, world, fx, audio);
 
 let state = 'title', stateT = 0, paused = false, hadLock = false;
+// 시점 감도 (1.0 = 기본, 저장됨)
+let sens = clamp(parseFloat(localStorage.getItem('emberhide.sens')) || 1, 0.1, 2.5);
+function setSens(v) {
+  sens = clamp(v, 0.1, 2.5); localStorage.setItem('emberhide.sens', sens);
+  for (const r of document.querySelectorAll('.sensR')) r.value = sens;
+  for (const b of document.querySelectorAll('.sensV')) b.textContent = sens.toFixed(2);
+}
+for (const r of document.querySelectorAll('.sensR')) { r.oninput = () => setSens(parseFloat(r.value)); r.onclick = e => e.stopPropagation(); }
+for (const row of document.querySelectorAll('.row.sens')) row.onclick = e => e.stopPropagation();
+setSens(sens);
 const cam = { yaw: 0, pitch: 0.2, dist: 6.6, target: new THREE.Vector3(0, 1.5, 22), fov: 58 };
 const _v = new THREE.Vector3(), _f = new THREE.Vector3();
 
@@ -124,7 +134,7 @@ function updateCamera(rdt) {
     _f.x += 3.2; camera.lookAt(_f); return;
   }
   const [lx, ly] = input.consumeLook();
-  cam.yaw -= lx * 0.0026; cam.pitch = clamp(cam.pitch + ly * 0.0022, -0.28, 1.15);
+  cam.yaw -= lx * 0.0011 * sens; cam.pitch = clamp(cam.pitch + ly * 0.0009 * sens, -0.28, 1.15);
   let dist = 6.6;
   _v.copy(player.pos); _v.y += 1.55;
   const locked = player.lockOn && !monster.dead;

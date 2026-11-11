@@ -77,6 +77,10 @@ button { font-family: var(--ui); color: var(--ink); background: none; border: 1p
 .row { margin-top: 22px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--dim); letter-spacing: .12em; }
 .q { width: 42px; height: 30px; font-size: 14px; }
 .q.on { border-color: var(--ember); color: var(--ember); }
+.row.sens input { width: 190px; accent-color: var(--ember); pointer-events: auto; cursor: pointer; }
+.row.sens b { color: var(--ink); font-size: 15px; min-width: 38px; }
+.row.center { justify-content: center; }
+body.touch .row.sens span::after { content: ' (시점 회전)'; }
 .keys { margin-top: 28px; font-size: 13.5px; line-height: 1.9; color: var(--dim); border-top: 1px solid var(--line); padding-top: 16px; }
 .keys b { display: inline-block; width: 78px; color: var(--ink); font-weight: 500; }
 #resStats { margin: 26px 0 4px; border-top: 1px solid var(--line); }
