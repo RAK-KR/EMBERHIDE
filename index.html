@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>EMBERHIDE</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/addons/" } }
+</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="hud" class="hidden">
+  <div id="pbars">
+    <div class="bar hp"><i id="hpGhost" class="ghost"></i><i id="hpFill"></i></div>
+    <div class="bar st"><i id="stFill"></i></div>
+    <div id="gauge"><span><i></i></span><span><i></i></span><span><i></i></span><b id="gaugeTag">검기</b></div>
+    <div id="items"><span id="potions">회복약 <b>5</b></span><span id="lives">남은 기회 <b>3</b></span></div>
+  </div>
+  <div id="boss">
+    <div id="bossName"><span id="bossTitle"></span><b id="bossNm"></b><em id="rageTag">분노</em></div>
+    <div class="bar boss"><i id="bossGhost" class="ghost"></i><i id="bossFill"></i></div>
+    <div id="parts"></div>
+  </div>
+  <div id="notice"></div>
+  <div id="lock"></div>
+  <div id="help">
+    <span><b>WASD</b> 이동</span><span><b>Shift</b> 달리기</span><span><b>Space</b> 회피</span><span><b>좌클릭</b> 연속 베기</span><span><b>우클릭</b> 강베기 (검기 1칸 소모 시 강화)</span>
+    <span><b>E</b> 흘려베기</span><span><b>F</b> 오의 (검기 3칸)</span><span><b>Q</b> 회복약</span><span><b>R</b> 록온</span><span><b>M</b> 음소거</span>
+  </div>
+</div>
+<div id="nums"></div>
+
+<div id="touchZone">
+  <div id="stick"><div id="stickKnob"></div></div>
+  <div id="tbtns">
+    <div class="tbtn main" data-act="attack">베기</div>
+    <div class="tbtn" data-act="heavy">강</div>
+    <div class="tbtn" data-act="roll">회피</div>
+    <div class="tbtn" data-act="counter">흘려</div>
+    <div class="tbtn" data-act="ult">오의</div>
+    <div class="tbtn sm" data-act="potion">약</div>
+    <div class="tbtn sm" data-act="lock">록온</div>
+  </div>
+</div>
+
+<div id="title" class="overlay">
+  <div class="panel">
+    <h1>EMBERHIDE</h1>
+    <p class="sub">대형 몬스터 수렵 액션 — 전투 프로토타입</p>
+    <button id="startBtn">수렵 개시</button>
+    <div class="row">
+      <span>그래픽</span>
+      <button class="q" data-q="high">상</button><button class="q" data-q="mid">중</button><button class="q" data-q="low">하</button>
+    </div>
+    <div class="keys">
+      <div><b>연속 베기</b> 좌클릭 4연격 — 맞힐수록 검기가 찹니다</div>
+      <div><b>강베기</b> 우클릭 — 검기 1칸을 써서 강화 일격</div>
+      <div><b>흘려베기</b> E — 공격이 닿는 순간에 맞추면 무효화 후 반격</div>
+      <div><b>오의</b> F — 검기 3칸을 모두 써서 연속 참격</div>
+      <div><b>부위</b> 머리·등 갑각 파괴, 꼬리 절단, 다리를 노려 넘어뜨리기</div>
+    </div>
+  </div>
+</div>
+
+<div id="result" class="overlay hidden">
+  <div class="panel">
+    <h2 id="resTitle">수렵 완료</h2>
+    <div id="resStats"></div>
+    <button id="againBtn">다시 수렵</button>
+  </div>
+</div>
+<div id="pause" class="overlay hidden"><div class="panel small"><h2>일시 정지</h2><p class="sub">화면을 클릭하면 계속합니다</p></div></div>
+<div id="fade"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
